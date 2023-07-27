@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "eedbe985-109d-4445-8af0-ef70cfe727b9",
+		"name": "claude2-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:5000/chat/0c24bd45-ac55-4a24-8393-1582369f5abd",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/chat/0c24bd45-ac55-4a24-8393-1582369f5abd",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"chat",
+						"0c24bd45-ac55-4a24-8393-1582369f5abd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/send",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"conversation_id\": \"0c24bd45-ac55-4a24-8393-1582369f5abd\", \r\n    \"prompt\": \"中国和美国的科技有哪些差距？估计多少年才能缩小差距？!\" \r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/send",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/chat",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"prompt\": \"亚洲金融危机爆发时间是什么时候？请告诉我为什么会出现金融危机?\" \r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/chat",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"chat"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

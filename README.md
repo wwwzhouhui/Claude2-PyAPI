@@ -9,7 +9,10 @@
 　　要使用这个API,您需要有以下:
 　　
 　　Python安装在您的系统上
-　　请求库安装
+
+​           python =">=3.7"
+
+ 　　请求库安装
 
 ```bash
   pip install requests

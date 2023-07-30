@@ -67,7 +67,7 @@ class Client:
 
         #response = requests.get(url, headers=headers)
         # 使用代理，解决国内网络不能访问问题
-        response = request(url, headers=headers,proxies=proxies)
+        response = request("GET", url, headers=headers,proxies=proxies)
         conversations = response.json()
 
         # Returns all conversation information in a list

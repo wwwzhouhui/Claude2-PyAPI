@@ -36,7 +36,49 @@
       cookie = os.environ.get('cookie')
       claude_api = Client(cookie)
 
-## 列出所有的对话
+##    使用2
+
+   使用docker 方式启动
+
+​       docker 编译打包镜像
+
+```
+docker build -t=wwwzhouhui/claude2-pyapi:0.0.2 .
+```
+
+​      docker 启动
+
+```
+docker run -d -p 5000:5000 -e "cookie=aaa" -e "uploads=/home/claude/uploads" -v /home/claude/uploads:/home/claude/uploads wwwzhouhui/claude2-pyapi:0.0.2
+```
+
+​    -p  启动容器内部端口5000，对外访问端口5000
+
+​    -e  容器启动参数通过cookie 传递参数。
+
+​    -v  读取文件附件临时文件，通过docker 挂卷方式。
+
+​      启动后
+
+![image-20230801135355477](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230801135355477.png)
+
+​      cmd 命令行查看容器启动
+
+​      ![image-20230801135526791](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230801135526791.png)
+
+​    容器内部启动日志
+
+![image-20230801135703958](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230801135703958.png)
+
+##  使用 replit 部署
+
+<a href="https://replit.com/@wwwzhouhui/Claude2-PyAPI#replit.nix">
+  <img alt="Run on Repl.it" src="https://repl.it/badge/github/valetzx/nodeunblockreplit" style="height: 40px; width: 190px;" />
+</a>
+
+https://replit.com/@wwwzhouhui/Claude2-PyAPI#replit.nix
+
+##  列出所有的对话
 
 列出所有会话Id与Claude ,你可以使用list_all_conversations方法:
 
@@ -248,6 +290,7 @@
 
 - version 0.0.1: 基础功能包括创建会话、聊天、获取历史会话，清理历史记录等功能
 - version 0.0.2:  修改文件读取功能，增加了文件上传功能和发送消息并附带附件功能；增加了项目演示视频信息。
+- version 0.0.3：增加docker容器运行，运行cookie传参数使用，避免程序写死；增加replit 部署
 
 
 

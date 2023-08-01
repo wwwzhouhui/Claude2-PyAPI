@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "eedbe985-109d-4445-8af0-ef70cfe727b9",
+		"_postman_id": "857efdae-79cd-45ef-9ea4-451578621b63",
 		"name": "claude2-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -18,7 +18,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/chat/0c24bd45-ac55-4a24-8393-1582369f5abd",
+					"raw": "http://127.0.0.1:5000/chat/2ae08045-3127-4a9c-abef-80fcb51983fb",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -29,7 +29,7 @@
 					"port": "5000",
 					"path": [
 						"chat",
-						"0c24bd45-ac55-4a24-8393-1582369f5abd"
+						"2ae08045-3127-4a9c-abef-80fcb51983fb"
 					]
 				}
 			},
@@ -51,7 +51,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"conversation_id\": \"0c24bd45-ac55-4a24-8393-1582369f5abd\", \r\n    \"prompt\": \"中国和美国的科技有哪些差距？估计多少年才能缩小差距？!\" \r\n}"
+					"raw": "{\r\n    \"conversation_id\": \"2ae08045-3127-4a9c-abef-80fcb51983fb\", \r\n    \"prompt\": \"日本在哪些领域超过中国，我们如何赶上这些领域呢？\" \r\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/send",
@@ -83,7 +83,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"prompt\": \"亚洲金融危机爆发时间是什么时候？请告诉我为什么会出现金融危机?\" \r\n}"
+					"raw": "{\r\n    \"prompt\": \"日本失去的三十年，请问这个是什么原因导致的？能解释一下目前日本所在的困局是什么？\" \r\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/chat",
@@ -97,6 +97,92 @@
 					"port": "5000",
 					"path": [
 						"chat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/upload",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/D:/uploads/zz.txt"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/upload",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/sendattachment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "conversation_id",
+							"value": "2ae08045-3127-4a9c-abef-80fcb51983fb",
+							"type": "default"
+						},
+						{
+							"key": "prompt",
+							"value": "请解释这段代码？",
+							"type": "default"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/D:/工作临时/2023/2023-7/2023年7月31日/zz.txt"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/sendattachment",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"sendattachment"
 					]
 				}
 			},

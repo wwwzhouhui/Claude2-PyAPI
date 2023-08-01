@@ -38,6 +38,21 @@ def send_message():
     response = client.send_message(prompt, conversation_id)
     return jsonify({'response': response})
 
+@app.route('/sendattachment', methods=['POST'])
+def send_message_attachment():
+    conversation_id = request.form.get("conversation_id")
+    prompt = request.form.get("prompt")
+    file = request.files['file']
+
+    cookie = get_cookie()
+    client = Client(cookie)
+    file_path = None
+    if file:
+        file_path = save_upload_file(file)
+
+    response = client.send_message(prompt, conversation_id,file_path)
+    return jsonify({'response': response})
+
 @app.route('/reset', methods=['POST'])
 def reset_conversations():
     cookie = get_cookie()

@@ -202,9 +202,62 @@
 
 ​    ![image-20230727115852900](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230727115852900.png)
 
+4 文件上传功能
+
+​    请求 方式 POST  请求url   http://127.0.0.1:5000/upload
+
+   headhers 设置  Content-Type=  multipart/form-data
+
+   ![image-20230801094048526](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230801094048526.png)
+
+ body  请求参数 使用form-data, form 表单1 参数file   类型选择 file   
+
+![image-20230801094345113](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230801094345113.png)
+
+![image-20230801094413288](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230801094413288.png)
+
+ 请求返回
+
+![image-20230801094552650](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230801094552650.png)
+
+
+
+5  发送消息并附带附件
+
+ 请求 方式 POST  请求url   http://127.0.0.1:5000/sendattachment
+
+   headhers 设置  Content-Type=  multipart/form-data
+
+![image-20230801094751415](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230801094751415.png)
+
+ body  请求参数 使用form-data, form 表单三个参数 ，conversation_id，prompt，file 其中 前面2个 文件类型txt,最后一个文件类型选择file
+
+![image-20230801094956606](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230801094956606.png)
+
+ 请求返回
+
+![image-20230801095053897](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230801095053897.png)
+
+刷新网页查看页面结果。
+
+![image-20230801095236798](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230801095236798.png)
+
+ 视频信息：https://foul-maxilla-075.notion.site/claude2-a81a9488e7e943f588f4fe80a0a2fce0
+
 ### 版本:
 
 - version 0.0.1: 基础功能包括创建会话、聊天、获取历史会话，清理历史记录等功能
+- version 0.0.2:  修改文件读取功能，增加了文件上传功能和发送消息并附带附件功能；增加了项目演示视频信息。
+
+
+
+### 视频演示地址:
+
+哔哩哔哩：https://www.bilibili.com/video/BV1Cz4y1x7BV/
+
+YouTube：https://www.youtube.com/watch?v=e-ssvXw9Di8&t=49s
+
+西瓜视频：https://www.ixigua.com/7260833345888584249?is_new_connect=0&is_new_user=0
 
 ## 🎉 致谢
 

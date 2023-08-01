@@ -79,7 +79,7 @@ class Client:
     # Send Message to Claude
     def send_message(self, prompt, conversation_id, attachment=None):
         url = "https://claude.ai/api/append_message"
-
+        #print("send_message,attachment"+attachment)
         # Upload attachment if provided
         attachments = []
         if attachment:
@@ -121,15 +121,18 @@ class Client:
             'Sec-Fetch-Site': 'same-origin',
             'TE': 'trailers'
         }
-
+        #print("获取headers信息payload数据："+payload)
         response = requests.post(url, headers=headers, data=payload, stream=True)
         # 使用代理，解决国内网络不能访问问题
         #response = request(url, headers=headers, data=payload, stream=True,proxies=proxies)
+        #print("获取claude2原始返回信息："+response.text)
         decoded_data = response.content.decode("utf-8")
+        #print("获取聊天claude2返回信息"+decoded_data)
         data = decoded_data.strip().split('\n')[-1]
+        #print("获取聊天claude2返回信息转data"+decoded_data)
 
         answer = {"answer": json.loads(data[6:])['completion']}['answer']
-
+        #print("获取聊天claude2返回信息转answer"+answer)
         # Returns answer
         return answer
 
@@ -234,6 +237,20 @@ class Client:
         return True
 
     def upload_attachment(self, file_path):
+        if file_path.endswith('.txt'):
+            file_name = os.path.basename(file_path)
+            file_size = os.path.getsize(file_path)
+            file_type = "text/plain"
+            with open(file_path, 'r', encoding='utf-8') as file:
+                file_content = file.read()
+
+            return {
+                "file_name": file_name,
+                "file_type": file_type,
+                "file_size": file_size,
+                "extracted_content": file_content
+            }
+
         url = 'https://claude.ai/api/convert_document'
         headers = {
             'User-Agent':
@@ -250,14 +267,11 @@ class Client:
         }
 
         file_name = os.path.basename(file_path)
-        print(file_name)
         content_type = self.get_content_type(file_path)
-        print(content_type)
         files = {
             'file': (file_name, open(file_path, 'rb'), content_type),
             'orgUuid': (None, self.organization_id)
         }
-        print(files)
         response = requests.post(url, headers=headers, files=files)
         # 使用代理，解决国内网络不能访问问题
         #response = request(url, headers=headers, files=files,proxies=proxies)

@@ -286,21 +286,45 @@ https://replit.com/@wwwzhouhui/Claude2-PyAPI#replit.nix
 
  视频信息：https://foul-maxilla-075.notion.site/claude2-a81a9488e7e943f588f4fe80a0a2fce0
 
+
+
+### 代理相关配置说明:
+
+env 配置文件增加
+
+```
+HTTP_PROXY="http://127.0.0.1:10809"
+HTTPS_PROXY="https://127.0.0.1:10809"
+#SOCKS5_PROXY="socks5://127.0.0.1:10808"
+ISPROXY=True
+```
+
+  如果启用代理模式访问，ISPROXY设置True.另外 配置HTTP_PROXY、HTTPS_PROXY 、SOCKS5_PROXY 代理。二者可选。如果不设置代理可以将ISPROXY 设置为空或者 ISPROXY=False  HTTP_PROXY、HTTPS_PROXY 、SOCKS5_PROXY 可以设置为空。
+
 ### 版本:
 
 - version 0.0.1: 基础功能包括创建会话、聊天、获取历史会话，清理历史记录等功能
 - version 0.0.2:  修改文件读取功能，增加了文件上传功能和发送消息并附带附件功能；增加了项目演示视频信息。
 - version 0.0.3：增加docker容器运行，运行cookie传参数使用，避免程序写死；增加replit 部署
-
-
+- version 0.0.4：修改claude_api.py接口代码，考虑国内网络环境以及容器部署没办法访问claude，增加代理proxy访问方式
 
 ### 视频演示地址:
+
+第一节 ：基础功能包括创建会话、聊天、获取历史会话
 
 哔哩哔哩：https://www.bilibili.com/video/BV1Cz4y1x7BV/
 
 YouTube：https://www.youtube.com/watch?v=e-ssvXw9Di8&t=49s
 
 西瓜视频：https://www.ixigua.com/7260833345888584249?is_new_connect=0&is_new_user=0
+
+第二节 ：文件上传功能和发送消息并附带附件功能，支持docker容器部署
+
+哔哩哔哩：https://www.bilibili.com/video/BV1KN411h7Hm/
+
+YouTube：https://www.youtube.com/watch?v=_uqHbZjoV14&t=40s
+
+西瓜视频：https://www.ixigua.com/7262393347132621352
 
 ## 🎉 致谢
 

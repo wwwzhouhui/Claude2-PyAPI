@@ -2,14 +2,30 @@ import requests
 import json
 import os
 import uuid
+from dotenv import load_dotenv
 
-
+load_dotenv()  # Load environment variables from .env file
 class Client:
 
-    def __init__(self, cookie):
+    def __init__(self, cookie,use_proxy=False):
         self.cookie = cookie
-        #self.organization_id = "28912dc3-bcd3-43c5-944c-a943a02d19fc"
+        self.use_proxy = use_proxy
+        self.proxies = self.load_proxies_from_env()
         self.organization_id =self.get_organization_id()
+
+    def load_proxies_from_env(self):
+        proxies = {}
+        if self.use_proxy:
+            http_proxy = os.getenv('HTTP_PROXY')
+            https_proxy = os.getenv('HTTPS_PROXY')
+            socks5_proxy = os.getenv('SOCKS5_PROXY')
+            if http_proxy:
+                proxies['http'] = http_proxy
+            if https_proxy:
+                proxies['https'] = https_proxy
+            if socks5_proxy:
+                proxies['socks5'] = socks5_proxy
+        return proxies
 
     def get_organization_id(self):
         url = "https://claude.ai/api/organizations"
@@ -27,13 +43,13 @@ class Client:
             'Cookie': f'{self.cookie}'
         }
 
-        #response = requests.request("GET", url, headers=headers)
-        ## 使用代理，解决国内网络不能访问问题
-        response = request("GET", url, headers=headers,proxies=proxies)
-        res = json.loads(response.text)
-        uuid = res[0]['uuid']
-
-        return uuid
+        response = self.send_request("GET",url,headers=headers)
+        if response.status_code == 200:
+            res = json.loads(response.text)
+            uuid = res[0]['uuid']
+            return uuid
+        else:
+            print(f"Error: {response.status_code} - {response.text}")
 
     def get_content_type(self, file_path):
         # Function to determine content type based on file extension
@@ -65,9 +81,7 @@ class Client:
             'Cookie': f'{self.cookie}'
         }
 
-        #response = requests.get(url, headers=headers)
-        # 使用代理，解决国内网络不能访问问题
-        response = request(url, headers=headers,proxies=proxies)
+        response = self.send_request("GET",url,headers=headers)
         conversations = response.json()
 
         # Returns all conversation information in a list
@@ -121,11 +135,8 @@ class Client:
             'Sec-Fetch-Site': 'same-origin',
             'TE': 'trailers'
         }
-        #print("获取headers信息payload数据："+payload)
-        response = requests.post(url, headers=headers, data=payload, stream=True)
-        # 使用代理，解决国内网络不能访问问题
-        #response = request(url, headers=headers, data=payload, stream=True,proxies=proxies)
-        #print("获取claude2原始返回信息："+response.text)
+
+        response = self.send_request("POST",url,headers=headers, data=payload, stream=True)
         decoded_data = response.content.decode("utf-8")
         #print("获取聊天claude2返回信息"+decoded_data)
         data = decoded_data.strip().split('\n')[-1]
@@ -157,12 +168,9 @@ class Client:
             'TE': 'trailers'
         }
 
-        #response = requests.request("DELETE", url, headers=headers, data=payload)
-        # 使用代理，解决国内网络不能访问问题
-        response = request("DELETE", url, headers=headers, data=payload,proxies=proxies)
-
+        response = self.send_request("DELETE",url,headers=headers, data=payload)
         # Returns True if deleted or False if any error in deleting
-        if response.status_code == 204:
+        if response.status_code == 200:
             return True
         else:
             return False
@@ -184,9 +192,7 @@ class Client:
             'Cookie': f'{self.cookie}'
         }
 
-        #response = requests.request("GET", url, headers=headers, params={'encoding': 'utf-8'})
-        # 使用代理，解决国内网络不能访问问题
-        response = request("GET", url, headers=headers, params={'encoding': 'utf-8'},proxies=proxies)
+        response = self.send_request("GET",url,headers=headers,params={'encoding': 'utf-8'})
         print(type(response))
 
         # List all the conversations in JSON
@@ -218,11 +224,7 @@ class Client:
             'Sec-Fetch-Site': 'same-origin',
             'TE': 'trailers'
         }
-
-       # response = requests.request("POST", url, headers=headers, data=payload)
-        # 使用代理，解决国内网络不能访问问题
-        response = request("POST", url, headers=headers, data=payload,proxies=proxies)
-
+        response = self.send_request("POST",url,headers=headers, data=payload)
         # Returns JSON of the newly created conversation information
         return response.json()
 
@@ -237,7 +239,7 @@ class Client:
         return True
 
     def upload_attachment(self, file_path):
-        if file_path.endswith('.txt'):
+        if file_path.endswith(('.txt', '.pdf', '.csv')):
             file_name = os.path.basename(file_path)
             file_size = os.path.getsize(file_path)
             file_type = "text/plain"
@@ -272,9 +274,7 @@ class Client:
             'file': (file_name, open(file_path, 'rb'), content_type),
             'orgUuid': (None, self.organization_id)
         }
-        response = requests.post(url, headers=headers, files=files)
-        # 使用代理，解决国内网络不能访问问题
-        #response = request(url, headers=headers, files=files,proxies=proxies)
+        response = self.send_request(url, "POST",headers=headers, files=files)
         if response.status_code == 200:
             return response.json()
         else:
@@ -304,22 +304,14 @@ class Client:
             'TE': 'trailers'
         }
 
-        #response = requests.request("POST", url, headers=headers, data=payload)
-        # 使用代理，解决国内网络不能访问问题
-        response=request("POST", url, headers=headers, data=payload,proxies=proxies)
+        response = self.send_request("POST",url,headers=headers, data=payload)
         if response.status_code == 200:
             return True
         else:
             return False
 
-proxies = {
-  'http': 'http://127.0.0.1:10809',
-  'https': 'http://127.0.0.1:10809',
-}
-
-def request(method, url, params=None, data=None, headers=None, proxies=None):
-    if proxies:
-        response = requests.request(method, url, params=params, data=data, headers=headers, proxies=proxies)
-    else:
-        response = requests.request(method, url, params=params, data=data, headers=headers)
-    return response
+    def send_request(self, method, url, headers, data=None, files=None, params=None, stream=False):
+        if self.use_proxy:
+            return requests.request(method, url, headers=headers, data=data, files=files, params=params, stream=stream,proxies=self.proxies)
+        else:
+            return requests.request(method, url, headers=headers, data=data, files=files, params=params, stream=stream)

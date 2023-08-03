@@ -12,7 +12,8 @@ def create_chat():
     prompt = data['prompt']
 
     cookie = get_cookie()
-    client = Client(cookie)
+    isproxy= get_proxy()
+    client = Client(cookie,isproxy)
     conversation = client.create_new_chat()
     conversation_id = conversation['uuid']
 
@@ -22,7 +23,9 @@ def create_chat():
 @app.route('/chat/<conversation_id>')
 def get_chat_history(conversation_id):
     cookie = get_cookie()
-    client = Client(cookie)
+    isproxy= get_proxy()
+    print(isproxy)
+    client = Client(cookie,isproxy)
     history = client.chat_conversation_history(conversation_id)
     return jsonify(history)
 
@@ -34,7 +37,8 @@ def send_message():
 
 
     cookie = get_cookie()
-    client = Client(cookie)
+    isproxy= get_proxy()
+    client = Client(cookie,isproxy)
     response = client.send_message(prompt, conversation_id)
     return jsonify({'response': response})
 
@@ -45,7 +49,8 @@ def send_message_attachment():
     file = request.files['file']
 
     cookie = get_cookie()
-    client = Client(cookie)
+    isproxy= get_proxy()
+    client = Client(cookie,isproxy)
     file_path = None
     if file:
         file_path = save_upload_file(file)
@@ -56,7 +61,8 @@ def send_message_attachment():
 @app.route('/reset', methods=['POST'])
 def reset_conversations():
     cookie = get_cookie()
-    client = Client(cookie)
+    isproxy= get_proxy()
+    client = Client(cookie,isproxy)
     result = client.reset_all()
     return jsonify({'result': result})
 
@@ -67,7 +73,8 @@ def rename_conversation():
     title = data['title']
 
     cookie = get_cookie()
-    client = Client(cookie)
+    isproxy= get_proxy()
+    client = Client(cookie,isproxy)
     result = client.rename_chat(title, conversation_id)
     return jsonify({'result': result})
 
@@ -77,7 +84,8 @@ def upload_attachment():
     if file:
         file_path = save_upload_file(file)
         cookie = get_cookie()
-        client = Client(cookie)
+        isproxy= get_proxy()
+        client = Client(cookie,isproxy)
         response = client.upload_attachment(file_path)
         return jsonify({'result': response})
     else:
@@ -93,14 +101,16 @@ def save_upload_file(file):
 @app.route('/conversations')
 def list_all_conversations():
     cookie = get_cookie()
-    client = Client(cookie)
+    isproxy= get_proxy()
+    client = Client(cookie,isproxy)
     conversations = client.list_all_conversations()
     return jsonify(conversations)
 
 @app.route('/history/<conversation_id>')
 def chat_conversation_history(conversation_id):
     cookie = get_cookie()
-    client = Client(cookie)
+    isproxy= get_proxy()
+    client = Client(cookie,isproxy)
     history = client.chat_conversation_history(conversation_id)
     return jsonify(history)
 # 加载.env文件中的环境变量
@@ -112,6 +122,14 @@ def get_cookie():
     if not cookie:
         raise ValueError("Please set the 'cookie' environment variable.")
     return cookie
+def  get_proxy()  -> bool:
+    #cookie = os.environ.get('cookie')
+    isproxy = os.getenv('ISPROXY')
+    print(isproxy)
+    if not isproxy:
+        return False
+    else:
+        return True if isproxy.lower() == 'true' else False
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True, use_reloader=True)
     app.default_encoding = 'utf-8'

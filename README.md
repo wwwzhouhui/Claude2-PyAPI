@@ -328,8 +328,52 @@ YouTube：https://www.youtube.com/watch?v=_uqHbZjoV14&t=40s
 
 ## 🎉 致谢
 
-感谢 @KoushikNavuluri  对本项目的支持。
+感谢以下项目对本项目提供的有力支持：
+
+1. [Claude-API](https://github.com/KoushikNavuluri/Claude-API)
+
+   提供claude2 网页端逆向接口
+
+2. [chatgpt-on-wechat](https://github.com/zhayujie/chatgpt-on-wechat)
+
+   提供微信、企业微信功能整合
 
 ## 问题反馈
 
 如有问题，请在GitHub Issue中提交，在提交问题之前，请先查阅以往的issue是否能解决你的问题。
+
+## 常见问题汇总
+
+1. 请求无权限
+
+   ![image-20230811130335065](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230811130335065.png)
+
+​     此类问题是当前访问的地区和国家不能访问https://claude.ai 导致的。类似前端页面返回错误地址信息
+
+​    ![image-20230811130718423](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230811130718423.png)
+
+![image-20230811131419471](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230811131419471.png)
+
+2. uuid 返回不了值
+
+      代码claude_api.py get_organization_id 方法中出错
+
+   ```
+    response = self.send_request("GET",url,headers=headers)
+           if response.status_code == 200:
+               res = json.loads(response.text)
+               uuid = res[0]['uuid']
+               return uuid
+           else:
+               print(f"Error: {response.status_code} - {response.text}")
+   ```
+
+   ​    返回code 200  但是程序解析  uuid = res[0]['uuid']      返回报错。
+
+      这是因为和问题1 类似权限问题导致网站重定向到错误页面 不能返回正确的 json 数字，代码在解析json代码不严谨返回解析报错。
+
+      可以通过网页端访问https://claude.ai/api/organizations
+
+      ![image-20230811131542303](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230811131542303.png)
+
+​      返回带有uuid的 json 返回值，说明网络情况是允许访问的。

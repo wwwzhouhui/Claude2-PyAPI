@@ -1,8 +1,8 @@
 import os
 from flask import Flask, request, jsonify
 from claude_api import Client
-from dotenv import load_dotenv
-
+#from dotenv import load_dotenv
+from common.utils import *
 
 app = Flask(__name__)
 
@@ -34,7 +34,6 @@ def send_message():
     data = request.get_json()
     conversation_id = data['conversation_id']
     prompt = data['prompt']
-
 
     cookie = get_cookie()
     isproxy= get_proxy()
@@ -114,22 +113,22 @@ def chat_conversation_history(conversation_id):
     history = client.chat_conversation_history(conversation_id)
     return jsonify(history)
 # 加载.env文件中的环境变量
-load_dotenv()
-def get_cookie():
-    #cookie = os.environ.get('cookie')
-    cookie = os.getenv('cookie')
-    print(cookie)
-    if not cookie:
-        raise ValueError("Please set the 'cookie' environment variable.")
-    return cookie
-def  get_proxy()  -> bool:
-    #cookie = os.environ.get('cookie')
-    isproxy = os.getenv('ISPROXY')
-    print(isproxy)
-    if not isproxy:
-        return False
-    else:
-        return True if isproxy.lower() == 'true' else False
+# load_dotenv()
+# def get_cookie():
+#     #cookie = os.environ.get('cookie')
+#     cookie = os.getenv('cookie')
+#     print(cookie)
+#     if not cookie:
+#         raise ValueError("Please set the 'cookie' environment variable.")
+#     return cookie
+# def  get_proxy()  -> bool:
+#     #cookie = os.environ.get('cookie')
+#     isproxy = os.getenv('ISPROXY')
+#     print(isproxy)
+#     if not isproxy:
+#         return False
+#     else:
+#         return True if isproxy.lower() == 'true' else False
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True, use_reloader=True)
     app.default_encoding = 'utf-8'

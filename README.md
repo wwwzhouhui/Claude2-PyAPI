@@ -301,12 +301,95 @@ ISPROXY=True
 
   如果启用代理模式访问，ISPROXY设置True.另外 配置HTTP_PROXY、HTTPS_PROXY 、SOCKS5_PROXY 代理。二者可选。如果不设置代理可以将ISPROXY 设置为空或者 ISPROXY=False  HTTP_PROXY、HTTPS_PROXY 、SOCKS5_PROXY 可以设置为空。
 
-### 版本:
+## *微信机器人功能:*
+
+增加claude_wechatbot.py 实现微信机器人调用claude2创建聊天信息、发送聊天信息、获取历史聊天对话功能。
+
+![Screenshot_20230813_213239_com.tencent.mm](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/Screenshot_20230813_213239_com.tencent.mm.jpg)
+
+主要代码简单介绍
+
+```
+itchat.instance.receivingRetryCount = 600  # 修改断线超时时间
+itchat.auto_login(enableCmdQR=2,hotReload=False,qrCallback=qrCallback)
+user_id = itchat.instance.storageClass.userName
+name = itchat.instance.storageClass.nickName
+logger.info("Wechat login success, user_id: {}, nickname: {}".format(user_id, name))
+#itchat.send('Hello, filehelper', toUserName='wwzhouhui')
+# msg="天气预报"
+# itchat.send('%s' % tuling(msg),toUserName='filehelper')
+itchat.run()
+```
+
+ 以上代码执行启动一个微信登陆监听画面，在系统控制台中会出现二维码。用微信扫描二维码，这样登陆访问的微信就具备机器人功能。
+
+![image-20230813214437724](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230813214437724.png)
+
+
+
+```
+# text_reply msg_files可以处理好友之间的聊天回复
+@itchat.msg_register([TEXT,MAP,CARD,NOTE,SHARING])
+def text_reply(msg):
+    #itchat.send('%s' % get_chat_history(msg['Text']),msg['FromUserName'])
+     itchat.send('%s' % send_message_judge(msg['Text']),msg['FromUserName'])
+```
+
+​     以上代码实现监听claude2 回复消息监听转发到微信中，通过微信机器人发送给问问题的人。
+
+​    
+
+```
+def create_chat(msg):
+    data = {'prompt': msg}
+    prompt = data['prompt']
+
+    cookie = get_cookie()
+    isproxy= get_proxy()
+    client = Client(cookie,isproxy)
+    conversation = client.create_new_chat()
+    conversation_id = conversation['uuid']
+    response = client.send_message(prompt, conversation_id)
+    logger.info("create_chat {} "+str(response))
+    answer = response
+    logger.info("create_chat {} answer".format(answer))
+    resultdata = {'uuid': conversation_id,'answer':answer}
+    return resultdata
+# 发送消息
+def send_message(msg,conversation_id):
+    data = {'prompt': msg}
+    prompt = data['prompt']
+    cookie = get_cookie()
+    isproxy= get_proxy()
+    client = Client(cookie,isproxy)
+    response = client.send_message(prompt, conversation_id)
+    logger.info("send_message {} "+str(response))
+    answer = response
+    logger.info("send_message {} answer".format(answer))
+    return answer
+
+
+Conversation_id = ""
+# 发送消息判断 如果是有Conversation_id 有值说明已经创建过群聊，直接发送消息，如果没有消息创建消息
+def send_message_judge(msg):
+    global Conversation_id
+    if Conversation_id != "":
+        return send_message(msg,Conversation_id)
+    else:
+        result= create_chat(msg)
+        Conversation_id = result['uuid']
+        return result['answer']
+```
+
+​    调用claude2api接口实现消息的创建和消息的发送给claude2，输入提示词实现调用claude2获取回答问题消息。
+
+###  版本:
 
 - version 0.0.1: 基础功能包括创建会话、聊天、获取历史会话，清理历史记录等功能
 - version 0.0.2:  修改文件读取功能，增加了文件上传功能和发送消息并附带附件功能；增加了项目演示视频信息。
 - version 0.0.3：增加docker容器运行，运行cookie传参数使用，避免程序写死；增加replit 部署
 - version 0.0.4：修改claude_api.py接口代码，考虑国内网络环境以及容器部署没办法访问claude，增加代理proxy访问方式
+- version 0.0.5：修改claude_api.py接口代码对于send_message返回数据解析做了相应修改；增加微信创建聊天、发送聊天、获取历史聊天信息功能；
 
 ### 视频演示地址:
 
@@ -348,9 +431,19 @@ YouTube：https://www.youtube.com/watch?v=_uqHbZjoV14&t=40s
 
    ![image-20230811130335065](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230811130335065.png)
 
-​     此类问题是当前访问的地区和国家不能访问https://claude.ai 导致的。类似前端页面返回错误地址信息
+​     
 
-​    ![image-20230811130718423](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230811130718423.png)
+此类问题是当前访问的地区和国家不能访问https://claude.ai 导致的。类似前端页面返回错误地址信息
+
+可以检查自己IP 地址 使用这个网站https://ipleak.net/ 测试
+
+![image-20230811132845703](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230811132845703.png)
+
+  
+
+以上ip显示是荷兰不是英国和美国这样导致访问地址受限。
+
+![image-20230811130718423](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230811130718423.png)
 
 ![image-20230811131419471](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230811131419471.png)
 

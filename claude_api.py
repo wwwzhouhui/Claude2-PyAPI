@@ -2,7 +2,9 @@ import requests
 import json
 import os
 import uuid
+import re
 from dotenv import load_dotenv
+from common.log import logger
 
 load_dotenv()  # Load environment variables from .env file
 class Client:
@@ -12,6 +14,7 @@ class Client:
         self.use_proxy = use_proxy
         self.proxies = self.load_proxies_from_env()
         self.organization_id =self.get_organization_id()
+        #self.organization_id ="28912dc3-bcd3-43c5-944c-a943a02d19fc"
 
     def load_proxies_from_env(self):
         proxies = {}
@@ -32,12 +35,12 @@ class Client:
 
         headers = {
             'User-Agent':
-                'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+                'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.5359.125 Safari/537.36',
             'Accept-Language': 'en-US,en;q=0.5',
             'Referer': 'https://claude.ai/chats',
             'Content-Type': 'application/json',
             'Sec-Fetch-Dest': 'empty',
-            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Mode': 'navigate',
             'Sec-Fetch-Site': 'same-origin',
             'Connection': 'keep-alive',
             'Cookie': f'{self.cookie}'
@@ -138,13 +141,18 @@ class Client:
 
         response = self.send_request("POST",url,headers=headers, data=payload, stream=True)
         decoded_data = response.content.decode("utf-8")
-        #print("获取聊天claude2返回信息"+decoded_data)
-        data = decoded_data.strip().split('\n')[-1]
-        #print("获取聊天claude2返回信息转data"+decoded_data)
+        #logger.info("send_message {} decoded_data：".format(decoded_data))
+        decoded_data = re.sub('\n+', '\n', decoded_data).strip()
+        data_strings = decoded_data.split('\n')
+        completions = []
+        for data_string in data_strings:
+            json_str = data_string[6:].strip()
+            data = json.loads(json_str)
+            if 'completion' in data:
+                completions.append(data['completion'])
 
-        answer = {"answer": json.loads(data[6:])['completion']}['answer']
-        #print("获取聊天claude2返回信息转answer"+answer)
-        # Returns answer
+        answer = ''.join(completions)
+        logger.info("send_message {} answer：".format(answer))
         return answer
 
     # Deletes the conversation

@@ -409,6 +409,14 @@ YouTube：https://www.youtube.com/watch?v=_uqHbZjoV14&t=40s
 
 西瓜视频：https://www.ixigua.com/7262393347132621352
 
+第三节 ：支持微信聊天功能，实现微信创建聊天、发送聊天、获取历史聊天信息功能
+
+哔哩哔哩：https://www.bilibili.com/video/BV1f8411R7Aj
+
+YouTube： https://www.youtube.com/watch?v=_l0yE2Kgm1g&t=40s
+
+西瓜视频：https://www.ixigua.com/7266855523801268772
+
 ## 🎉 致谢
 
 感谢以下项目对本项目提供的有力支持：

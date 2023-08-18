@@ -482,5 +482,6 @@ YouTube： https://www.youtube.com/watch?v=_l0yE2Kgm1g&t=40s
 
 3. 发任何消息回复： {"error": {"type": "permission_error", "message": "We are unable to serve your request"}} 
 
-   在requirements.txt 增加urllib3和curl_cffi
-   
+   在requirements.txt 增加urllib3和curl_cffi 2个依赖。修改了curl_cffi 模拟浏览器模式
+
+   详细测试看这个视频https://foul-maxilla-075.notion.site/testcurl_cff-We-are-unable-to-serve-your-request-f5445d3f8dc040be8ee94a1a19ad923a

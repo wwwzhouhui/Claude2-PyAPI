@@ -390,6 +390,7 @@ def send_message_judge(msg):
 - version 0.0.3：增加docker容器运行，运行cookie传参数使用，避免程序写死；增加replit 部署
 - version 0.0.4：修改claude_api.py接口代码，考虑国内网络环境以及容器部署没办法访问claude，增加代理proxy访问方式
 - version 0.0.5：修改claude_api.py接口代码对于send_message返回数据解析做了相应修改；增加微信创建聊天、发送聊天、获取历史聊天信息功能；
+- version 0.0.6：修复We are unable to serve your request 问题，替换成curl_cffi 模拟浏览器模式，增加testcurl_cffi.py 测试代码
 
 ### 视频演示地址:
 
@@ -478,3 +479,8 @@ YouTube： https://www.youtube.com/watch?v=_l0yE2Kgm1g&t=40s
       ![image-20230811131542303](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230811131542303.png)
 
 ​      返回带有uuid的 json 返回值，说明网络情况是允许访问的。
+
+3. 发任何消息回复： {"error": {"type": "permission_error", "message": "We are unable to serve your request"}} 
+
+   在requirements.txt 增加urllib3和curl_cffi
+   

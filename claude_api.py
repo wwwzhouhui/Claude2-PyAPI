@@ -1,8 +1,8 @@
-import requests
 import json
 import os
 import uuid
 import re
+from curl_cffi import requests
 from dotenv import load_dotenv
 from common.log import logger
 
@@ -320,6 +320,6 @@ class Client:
 
     def send_request(self, method, url, headers, data=None, files=None, params=None, stream=False):
         if self.use_proxy:
-            return requests.request(method, url, headers=headers, data=data, files=files, params=params, stream=stream,proxies=self.proxies)
+            return requests.request(method, url, headers=headers, data=data, files=files, params=params,impersonate="chrome110",proxies=self.proxies,timeout=500)
         else:
-            return requests.request(method, url, headers=headers, data=data, files=files, params=params, stream=stream)
+            return requests.request(method, url, headers=headers, data=data, files=files, params=params,impersonate="chrome110",timeout=500)

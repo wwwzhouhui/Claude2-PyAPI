@@ -1,8 +1,8 @@
-import requests
 import json
 import os
 import uuid
 import re
+from curl_cffi import requests
 from dotenv import load_dotenv
 from common.log import logger
 
@@ -13,6 +13,8 @@ class Client:
         self.cookie = cookie
         self.use_proxy = use_proxy
         self.proxies = self.load_proxies_from_env()
+        #logger.info("__init__: use_proxy: {}".format(self.use_proxy))
+        #logger.info("__init__: proxies: {}".format(self.proxies))
         self.organization_id =self.get_organization_id()
         #self.organization_id ="28912dc3-bcd3-43c5-944c-a943a02d19fc"
 
@@ -27,7 +29,7 @@ class Client:
             if https_proxy:
                 proxies['https'] = https_proxy
             if socks5_proxy:
-                proxies['socks5'] = socks5_proxy
+                proxies['https'] = socks5_proxy
         return proxies
 
     def get_organization_id(self):
@@ -320,6 +322,6 @@ class Client:
 
     def send_request(self, method, url, headers, data=None, files=None, params=None, stream=False):
         if self.use_proxy:
-            return requests.request(method, url, headers=headers, data=data, files=files, params=params, stream=stream,proxies=self.proxies)
+            return requests.request(method, url, headers=headers, data=data, files=files, params=params,impersonate="chrome110",proxies=self.proxies,timeout=500)
         else:
-            return requests.request(method, url, headers=headers, data=data, files=files, params=params, stream=stream)
+            return requests.request(method, url, headers=headers, data=data, files=files, params=params,impersonate="chrome110",timeout=500)

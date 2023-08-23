@@ -1,10 +1,13 @@
 flask==2.2.2
 python-dotenv==0.21.0
 requests==2.28.1
+urllib3==1.25.11
+curl_cffi
+
 #tuling123==1.7.1
 #corpwechatbot==0.6.4
 PyQRCode>=1.2.1
 qrcode>=7.4.2
-#wechatpy==1.8.18
+wechatpy==1.8.18
 #web.py
 pillow

@@ -383,6 +383,18 @@ def send_message_judge(msg):
 
 ​    调用claude2api接口实现消息的创建和消息的发送给claude2，输入提示词实现调用claude2获取回答问题消息。
 
+###  *企业微信机器人功能:*
+
+增加了ImApp.py 通过工厂方法构建IM 功能目前包含企业微信和微信功能目前测试通过了claude2创建聊天信息、发送聊天信息发生消息给企业微信。
+
+![](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/%25E4%25BC%2581%25E4%25B8%259A%25E5%25BE%25AE%25E4%25BF%25A1%25E6%2588%25AA%25E5%259B%25BE_1692783572160.png)
+
+   企业微信需要回调函数，所以程序运行需要有公网访问地址，最好需要固定IP
+
+   ![image-20230823174713575](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230823174713575.png)
+
+详细测试可以看视频https://foul-maxilla-075.notion.site/claude2-3ed6c06da96249a1ad106d1ce987aa6c
+
 ###  版本:
 
 - version 0.0.1: 基础功能包括创建会话、聊天、获取历史会话，清理历史记录等功能
@@ -390,6 +402,8 @@ def send_message_judge(msg):
 - version 0.0.3：增加docker容器运行，运行cookie传参数使用，避免程序写死；增加replit 部署
 - version 0.0.4：修改claude_api.py接口代码，考虑国内网络环境以及容器部署没办法访问claude，增加代理proxy访问方式
 - version 0.0.5：修改claude_api.py接口代码对于send_message返回数据解析做了相应修改；增加微信创建聊天、发送聊天、获取历史聊天信息功能；
+- version 0.0.6：修复We are unable to serve your request 问题，替换成curl_cffi 模拟浏览器模式，增加testcurl_cffi.py 测试代码
+- version 0.0.7：新增加IM功能工厂代码，目前完成企业微信整合claude_api.py接口功能，后面重写微信功能
 
 ### 视频演示地址:
 
@@ -478,3 +492,9 @@ YouTube： https://www.youtube.com/watch?v=_l0yE2Kgm1g&t=40s
       ![image-20230811131542303](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230811131542303.png)
 
 ​      返回带有uuid的 json 返回值，说明网络情况是允许访问的。
+
+3. 发任何消息回复： {"error": {"type": "permission_error", "message": "We are unable to serve your request"}} 
+
+   在requirements.txt 增加urllib3和curl_cffi 2个依赖。修改了curl_cffi 模拟浏览器模式
+
+   详细测试看这个视频https://foul-maxilla-075.notion.site/testcurl_cff-We-are-unable-to-serve-your-request-f5445d3f8dc040be8ee94a1a19ad923a

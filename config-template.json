@@ -1,0 +1,15 @@
+{
+  "open_ai_api_key": "你的OPENAI KEY",
+  "conversation_max_tokens": 4096,
+  "WECHAT_TOKEN": "企业微信 回调token",
+  "WECHAT_ENCODING_AES_KEY":"企业微信 编码后的AES Key",
+  "WECHAT_CORP_ID":"企业微信 企业ID",
+  "Secret":"企业微信 应用Secret",
+  "AppId":"企业微信 应用ID",
+  "character_desc": "你是claude2, 一个由Anthropic训练的大型语言模型, 你旨在回答并解决人们的任何问题，并且可以使用多种语言与人交流。",
+  "cookie":"claude2网页端cookie值",
+  "isproxy": "True",
+  "HTTP_PROXY": "http://127.0.0.1:10809",
+  "HTTPS_PROXY": "https://127.0.0.1:10809",
+  "SOCKS5_PROXY": "socks5://127.0.0.1:10808"
+}

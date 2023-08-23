@@ -70,6 +70,24 @@ docker run -d -p 5000:5000 -e "cookie=aaa" -e "uploads=/home/claude/uploads" -v 
 
 ![image-20230801135703958](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230801135703958.png)
 
+## IM启动
+
+​        IM 功能入口程序是ImApp.py  所以启动如下命令
+
+​      windows 命令
+
+```
+Python3  ImApp.py
+```
+
+​      linux  命令
+
+```
+nohup python3 ImApp.py & tail -f nohup.out
+```
+
+
+
 ##  使用 replit 部署
 
 <a href="https://replit.com/@wwwzhouhui/Claude2-PyAPI#replit.nix">

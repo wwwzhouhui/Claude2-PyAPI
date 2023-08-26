@@ -11,5 +11,17 @@
   "isproxy": "True",
   "HTTP_PROXY": "http://127.0.0.1:10809",
   "HTTPS_PROXY": "https://127.0.0.1:10809",
-  "SOCKS5_PROXY": "socks5://127.0.0.1:10808"
+  "SOCKS5_PROXY": "socks5://127.0.0.1:10808",
+  "Conversation_id": "",
+  "group_chat_prefix": [
+    "@bot"
+  ],
+  "single_chat_reply_prefix": "[bot] ",
+  "image_create_prefix": [
+    "画"
+  ],
+  "single_chat_prefix": [
+    "bot",
+    "@bot"
+  ]
 }

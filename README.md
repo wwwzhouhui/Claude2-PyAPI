@@ -450,6 +450,14 @@ YouTube： https://www.youtube.com/watch?v=_l0yE2Kgm1g&t=40s
 
 西瓜视频：https://www.ixigua.com/7266855523801268772
 
+第四节 ：整合微信聊天功能，支持企业微信聊天功能 实现微信创建聊天、发送聊天、信息功能
+
+哔哩哔哩：https://www.bilibili.com/video/BV1LP411W7tN	
+
+YouTube： https://www.youtube.com/watch?v=aTZvQcO5Ou8&t=62s
+
+西瓜视频：https://www.toutiao.com/video/7271532310493659683
+
 ## 🎉 致谢
 
 感谢以下项目对本项目提供的有力支持：

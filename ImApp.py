@@ -7,7 +7,7 @@ def run():
         config.load_config()
 
         # create channel
-        channel = channel_factory.create_channel("wxcom")
+        channel = channel_factory.create_channel("qq")
 
         # startup channel
         channel.startup()

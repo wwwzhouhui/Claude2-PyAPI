@@ -23,5 +23,7 @@
   "single_chat_prefix": [
     "bot",
     "@bot"
-  ]
+  ],
+  "reverse_ws_host":"0.0.0.0",
+  "reverse_ws_port":8080
 }

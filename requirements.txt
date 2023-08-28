@@ -7,3 +7,7 @@ qrcode>=7.4.2
 wechatpy==1.8.18
 #web.py
 pillow
+aiocqhttp
+pydantic
+cryptography
+openai

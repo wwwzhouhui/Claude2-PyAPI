@@ -413,7 +413,15 @@ def send_message_judge(msg):
 
 详细测试可以看视频https://foul-maxilla-075.notion.site/claude2-3ed6c06da96249a1ad106d1ce987aa6c
 
-###  版本:
+## *qq机器人功能:*
+
+增加qqchat_channel.py  频道通过反向代理socket整合go-cqhttp实现了QQ调用claude2接口功能
+
+![image-20230828224651203](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230828224651203.png)
+
+
+
+###  ![](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/eoif0-x813h.gif)
 
 - version 0.0.1: 基础功能包括创建会话、聊天、获取历史会话，清理历史记录等功能
 - version 0.0.2:  修改文件读取功能，增加了文件上传功能和发送消息并附带附件功能；增加了项目演示视频信息。
@@ -422,6 +430,7 @@ def send_message_judge(msg):
 - version 0.0.5：修改claude_api.py接口代码对于send_message返回数据解析做了相应修改；增加微信创建聊天、发送聊天、获取历史聊天信息功能；
 - version 0.0.6：修复We are unable to serve your request 问题，替换成curl_cffi 模拟浏览器模式，增加testcurl_cffi.py 测试代码
 - version 0.0.7：新增加IM功能工厂代码，目前完成企业微信整合claude_api.py接口功能，后面重写微信功能
+- version 0.0.8：新增QQ整合claude_api.py接口功能，可以通过QQ执行claude2接口调用了。实现qq使用到了go-cqhttp
 
 
 ### 视频演示地址:
@@ -469,6 +478,10 @@ YouTube： https://www.youtube.com/watch?v=aTZvQcO5Ou8&t=62s
 2. [chatgpt-on-wechat](https://github.com/zhayujie/chatgpt-on-wechat)
 
    提供微信、企业微信功能整合
+   
+3. [go-cqhttp](https://github.com/Mrs4s/go-cqhttp)
+
+   提供QQ功能
 
 ## 问题反馈
 

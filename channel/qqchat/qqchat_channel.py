@@ -4,15 +4,19 @@ from channel.channel import Channel
 from common.log import logger
 from config import conf
 from bridge.bridge import Bridge
+from concurrent.futures import ThreadPoolExecutor
 bot = CQHttp()
+thread_pool = ThreadPoolExecutor(max_workers=8)
 
 
 @bot.on_message('private')
 async def _(event: Event):
-    context = dict()
-    logger.info(event.message)
-    await bot.send(event, QqchaChannel.build_reply_content(event.message,event.message, context))
-    return {'reply': event.message}
+    # context = dict()
+    # logger.info(event.message)
+    # await bot.send(event, QqchaChannel.build_reply_content(event.message,event.message, context))
+    # return {'reply': event.message}
+    logger.info("event: {}", event)
+    QqchaChannel().handle(event)
 
 @bot.on_startup
 async def startup():
@@ -32,7 +36,13 @@ class QqchaChannel(Channel):
         bot.run(host=self.host, port=self.port)
 
     def handle(self, msg):
-        logger.info("handle"+msg)
+        thread_pool.submit(self._do_handle, msg)
+    def _do_handle(self, msg):
+        context = dict()
+        #logger.info("msg:", msg.message)
+        #context['from_user_id'] = msg.user_id
+        reply_text = self.build_reply_content(msg.message, context)
+        bot.sync.send_private_msg(user_id=msg.user_id, message=reply_text)
 
     def send(self, msg, receiver):
         logger.info('[QQ] sendMsg={}, receiver={}'.format(msg, receiver))

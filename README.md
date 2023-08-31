@@ -431,6 +431,7 @@ def send_message_judge(msg):
 - version 0.0.6：修复We are unable to serve your request 问题，替换成curl_cffi 模拟浏览器模式，增加testcurl_cffi.py 测试代码
 - version 0.0.7：新增加IM功能工厂代码，目前完成企业微信整合claude_api.py接口功能，后面重写微信功能
 - version 0.0.8：新增QQ整合claude_api.py接口功能，可以通过QQ执行claude2接口调用了。实现qq使用到了go-cqhttp
+- version 0.0.9：修改了claude_ai_bot.py代码微信、QQ发送消息每次都创建消息的BUG. 增加了钉钉IM功能。
 
 
 ### 视频演示地址:

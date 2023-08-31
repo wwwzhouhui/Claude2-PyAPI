@@ -5,18 +5,19 @@ from bot.bot import Bot
 from config import conf
 from claude_api import Client
 from common.log import logger
+from bot.claude.idStore import idStore
 
-
-# Claude AI对话接口
 class ClaudeAiBot(Bot):
 
-    Conversation_id = ""
+
     def reply(self, query, context=None):
-        if self.Conversation_id != "":
-            return self.send_message(query,self.Conversation_id)
+        storage = idStore()
+        Conversation_id=storage.get_id()
+        if Conversation_id is not None:
+            return self.send_message(query,Conversation_id)
         else:
-            result= self.create_chat(query,self.Conversation_id)
-            self.Conversation_id = result['uuid']
+            result= self.create_chat(query,Conversation_id)
+            storage.set_id(result['uuid'])
             return result['answer']
         # 创建新的对话聊天信息
     def create_chat(self,msg,conversation_id):

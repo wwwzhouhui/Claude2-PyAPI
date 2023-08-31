@@ -5,7 +5,7 @@ channel factory
 from channel.wechat.wechat_channel import WechatChannel
 from channel.wechatcom.wechatenterprise_channel import WechatEnterpriseChannel
 from channel.qqchat.qqchat_channel import QqchaChannel
-#from channel.dingtalk.dingtalk_channel import DingTalkChannel
+from channel.dingtalk.dingtalk_channel import DingTalkChannel
 
 def create_channel(channel_type):
     """
@@ -19,6 +19,6 @@ def create_channel(channel_type):
         return WechatEnterpriseChannel()
     if channel_type == 'qq':
         return QqchaChannel()
-    # if channel_type == 'dd':
-    #     return DingTalkChannel()
+    if channel_type == 'dd':
+        return DingTalkChannel()
     raise RuntimeError

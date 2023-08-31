@@ -26,6 +26,7 @@
   ],
   "reverse_ws_host":"0.0.0.0",
   "reverse_ws_port":8080,
+  "dingtalk_key": "xx",
   "dingtalk_secret": "xx",
   "dingtalk_token": "xx",
   "dingtalk_post_token": "xx",

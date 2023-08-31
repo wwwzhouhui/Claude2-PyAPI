@@ -17,11 +17,11 @@ from channel.channel import Channel
 
 
 class DingTalkHandler():
-    def __init__(self, config):
-        #self.dingtalk_key = config.get('dingtalk_key')
-        self.dingtalk_secret = config.get('dingtalk_secret')
-        self.dingtalk_token = config.get('dingtalk_token')
-        self.dingtalk_post_token = config.get('dingtalk_post_token')
+    def __init__(self):
+        self.dingtalk_key = conf().get('dingtalk_key')
+        self.dingtalk_secret = conf().get('dingtalk_secret')
+        self.dingtalk_token = conf().get('dingtalk_token')
+        self.dingtalk_post_token = conf().get('dingtalk_post_token')
         self.access_token = None
         logger.info("[DingTalk]  AppSecret={} Token={} post Token={}".format( self.dingtalk_secret, self.dingtalk_token, self.dingtalk_post_token))
 
@@ -267,7 +267,7 @@ handlers = dict()
 #         group_name = robot_config.get('dingtalk_group')
 #         handlers[group_name or robot_key] = DingTalkHandler(robot_config)
 # else:
-handlers['DEFAULT'] = DingTalkHandler("dingtalk")
+handlers['DEFAULT'] = DingTalkHandler()
 http_app = Flask(__name__,)
 
 

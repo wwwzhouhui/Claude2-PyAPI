@@ -7,7 +7,7 @@ def run():
         config.load_config()
 
         # create channel
-        channel = channel_factory.create_channel("qq")
+        channel = channel_factory.create_channel("feishu")
 
         # startup channel
         channel.startup()

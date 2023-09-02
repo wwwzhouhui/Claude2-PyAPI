@@ -26,10 +26,15 @@
   ],
   "reverse_ws_host":"0.0.0.0",
   "reverse_ws_port":8080,
-  "dingtalk_key": "xx",
+  "dingtalk_key": "",
   "dingtalk_secret": "xx",
   "dingtalk_token": "xx",
   "dingtalk_post_token": "xx",
   "dingtalk_host":"0.0.0.0",
-  "dingtalk_port":8080
+  "dingtalk_port":8888,
+  "feishu_host":"0.0.0.0",
+  "feishu_port":8888,
+  "feishu_app_id":"飞书应用凭证ID",
+  "feishu_app_secret":"飞书应用凭证secret",
+  "feishu_verification_token":"事件订阅验证令牌"
 }

@@ -28,6 +28,8 @@ class QqchaChannel(Channel):
     def __init__(self):
         self.host = conf().get('reverse_ws_host')
         self.port = conf().get('reverse_ws_port')
+        logger.info("[qq] host={}, port={} ".format(
+            self.host, self.port))
 
     def startup(self):
         # startup()

@@ -33,6 +33,8 @@ class WechatEnterpriseChannel(Channel):
         self.EncodingAESKey = conf().get('WECHAT_ENCODING_AES_KEY')
         self.crypto = WeChatCrypto(self.TOKEN, self.EncodingAESKey, self.CorpId)
         self.client = WeChatClient(self.CorpId, self.Secret,self.AppId)
+        logger.info("[wxcom] CorpId={}, Secret={} AppId={} TOKEN={} EncodingAESKey={} ".format(
+            self.CorpId, self.Secret, self.AppId,self.TOKEN, self.EncodingAESKey))
 
     def startup(self):
         # start message listener

@@ -14,9 +14,10 @@ from flask import Flask, request, render_template, make_response
 #from config import channel_conf
 #from config import channel_conf_val
 from channel.channel import Channel
+from concurrent.futures import ThreadPoolExecutor
 
 
-class DingTalkHandler():
+class DingTalkHandler(Channel):
     def __init__(self):
         self.dingtalk_key = conf().get('dingtalk_key')
         self.dingtalk_secret = conf().get('dingtalk_secret')

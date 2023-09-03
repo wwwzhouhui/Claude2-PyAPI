@@ -473,6 +473,16 @@ YouTube： https://www.youtube.com/watch?v=aTZvQcO5Ou8&t=62s
 
 西瓜视频：https://www.toutiao.com/video/7271532310493659683
 
+第五节 ：整合QQ聊天,飞书功能，支持企QQ、飞书聊天功能 实现QQ、飞书创建聊天、发送聊天、信息功能
+
+哔哩哔哩：https://www.bilibili.com/video/BV19F41167sD	
+
+YouTube：https://www.youtube.com/watch?v=6rJvyaWJgYE
+
+西瓜视频：https://www.ixigua.com/7274261124952883723
+
+
+
 ## 🎉 致谢
 
 感谢以下项目对本项目提供的有力支持：

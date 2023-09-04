@@ -8,6 +8,7 @@ import requests
 from urllib.parse import quote_plus
 from common.log import logger
 from config import conf
+from bridge.bridge import Bridge
 from flask import Flask, request, render_template, make_response
 #from common import const
 #from common import functions
@@ -254,12 +255,14 @@ class DingTalkChannel(Channel):
             #     context['type'] = 'IMAGE_CREATE'
             id = sender_id
             context['from_user_id'] = str(id)
-            reply = super().build_reply_content(prompt, context)
+            reply = self.build_reply_content(prompt, context)
         return reply
 
+    def build_reply_content(self, query, context=None):
+        return Bridge().fetch_reply_content(query, context)
 
 dd = DingTalkChannel()
-handlers = dict()
+
 # robots = channel_conf(const.DINGTALK).get('dingtalk_robots')
 # if robots and len(robots) > 0:
 #     for robot in robots:
@@ -268,12 +271,15 @@ handlers = dict()
 #         group_name = robot_config.get('dingtalk_group')
 #         handlers[group_name or robot_key] = DingTalkHandler(robot_config)
 # else:
-handlers['DEFAULT'] = DingTalkHandler()
+
+thread_pool = ThreadPoolExecutor(max_workers=8)
 http_app = Flask(__name__,)
 
 
 @http_app.route("/", methods=['POST'])
 def chat():
+    #handlers = dict()
+    handlers = DingTalkHandler()
     logger.info("[DingTalk] chat_headers={}".format(str(request.headers)))
     logger.info("[DingTalk] chat={}".format(str(request.data)))
     token = request.headers.get('token')
@@ -286,10 +292,10 @@ def chat():
         group_name = None
         if 'conversationTitle' in data:
             group_name = data['conversationTitle']
-        handler = handlers.get(group_name, handlers.get(code, handlers.get('DEFAULT')))
-        if handler.dingtalk_post_token and token != handler.dingtalk_post_token:
-            return {'ret': 203}
-        handler.chat(dd, data)
+        # handler = handlers.get(group_name, handlers.get(code, handlers.get('DEFAULT')))
+        # if handler.dingtalk_post_token and token != handler.dingtalk_post_token:
+        #     return {'ret': 203}
+        handlers.chat(dd, data)
         return {'ret': 200}
 
     return {'ret': 201}

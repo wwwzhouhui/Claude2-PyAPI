@@ -6,7 +6,7 @@ from channel.wechat.wechat_channel import WechatChannel
 from channel.wechatcom.wechatenterprise_channel import WechatEnterpriseChannel
 from channel.qqchat.qqchat_channel import QqchaChannel
 from channel.dingtalk.dingtalk_channel import DingTalkChannel
-from channel.feiShu.feishu_channel import FeiShuChannel
+from channel.feishu.feishu_channel import FeiShuChannel
 
 def create_channel(channel_type):
     """

@@ -427,6 +427,10 @@ def send_message_judge(msg):
 
 ![image-20230902173417020](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230902173417020.png)
 
+##        *钉钉机器人功能*
+
+​    详细见[钉钉配置](https://github.com/wwwzhouhui/Claude2-PyAPI/blob/master/README_dd.md)
+
 - version 0.0.1: 基础功能包括创建会话、聊天、获取历史会话，清理历史记录等功能
 - version 0.0.2:  修改文件读取功能，增加了文件上传功能和发送消息并附带附件功能；增加了项目演示视频信息。
 - version 0.0.3：增加docker容器运行，运行cookie传参数使用，避免程序写死；增加replit 部署
@@ -437,6 +441,7 @@ def send_message_judge(msg):
 - version 0.0.8：新增QQ整合claude_api.py接口功能，可以通过QQ执行claude2接口调用了。实现qq使用到了go-cqhttp
 - version 0.0.9：修改了claude_ai_bot.py代码微信、QQ发送消息每次都创建消息的BUG. 增加了钉钉IM功能。
 - version 0.10.0：新增加了飞书整合claude_api.py接口功能，开源通过飞书执行claude2接口调用了。
+- version 0.11.0：修改了dingtalk_channel.py代码，完成了钉钉整合claude2接口调用，并完成了测试。
 
 
 ### 视频演示地址:

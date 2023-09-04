@@ -7,6 +7,7 @@ from channel.wechatcom.wechatenterprise_channel import WechatEnterpriseChannel
 from channel.qqchat.qqchat_channel import QqchaChannel
 from channel.dingtalk.dingtalk_channel import DingTalkChannel
 from channel.feishu.feishu_channel import FeiShuChannel
+from channel.telegram.telegram_channel import TelegramChannel
 
 def create_channel(channel_type):
     """
@@ -24,4 +25,6 @@ def create_channel(channel_type):
         return DingTalkChannel()
     if channel_type == 'feishu':
         return FeiShuChannel()
+    if channel_type == 'telegram':
+        return TelegramChannel()
     raise RuntimeError

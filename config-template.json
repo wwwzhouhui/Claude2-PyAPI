@@ -36,5 +36,8 @@
   "feishu_port":8888,
   "feishu_app_id":"飞书应用凭证ID",
   "feishu_app_secret":"飞书应用凭证secret",
-  "feishu_verification_token":"事件订阅验证令牌"
+  "feishu_verification_token":"事件订阅验证令牌",
+  "telegram": {
+    "bot_token": "xx:xx"
+  }
 }

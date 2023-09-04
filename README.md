@@ -442,6 +442,8 @@ def send_message_judge(msg):
 - version 0.0.9：修改了claude_ai_bot.py代码微信、QQ发送消息每次都创建消息的BUG. 增加了钉钉IM功能。
 - version 0.10.0：新增加了飞书整合claude_api.py接口功能，开源通过飞书执行claude2接口调用了。
 - version 0.11.0：修改了dingtalk_channel.py代码，完成了钉钉整合claude2接口调用，并完成了测试。
+- version 0.11.1：修改了telegram_channel.py代码，未测试。
+- version 0.11.2：应网友要求增加了微信技术交流群。
 
 
 ### 视频演示地址:
@@ -559,3 +561,7 @@ YouTube：https://www.youtube.com/watch?v=6rJvyaWJgYE
    在requirements.txt 增加urllib3和curl_cffi 2个依赖。修改了curl_cffi 模拟浏览器模式
 
    详细测试看这个视频https://foul-maxilla-075.notion.site/testcurl_cff-We-are-unable-to-serve-your-request-f5445d3f8dc040be8ee94a1a19ad923a
+
+##       技术交流群
+
+![image-20230904182543187](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20230904182543187.png)

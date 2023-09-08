@@ -431,6 +431,10 @@ def send_message_judge(msg):
 
 ​    详细见[钉钉配置](https://github.com/wwwzhouhui/Claude2-PyAPI/blob/master/README_dd.md)
 
+## *微信公众号功能*
+
+   详细见[微信公众号配置](https://github.com/wwwzhouhui/Claude2-PyAPI/blob/master/README_wechatmp.md)
+
 - version 0.0.1: 基础功能包括创建会话、聊天、获取历史会话，清理历史记录等功能
 - version 0.0.2:  修改文件读取功能，增加了文件上传功能和发送消息并附带附件功能；增加了项目演示视频信息。
 - version 0.0.3：增加docker容器运行，运行cookie传参数使用，避免程序写死；增加replit 部署
@@ -444,6 +448,7 @@ def send_message_judge(msg):
 - version 0.11.0：修改了dingtalk_channel.py代码，完成了钉钉整合claude2接口调用，并完成了测试。
 - version 0.11.1：修改了telegram_channel.py代码，未测试。
 - version 0.11.2：应网友要求增加了微信技术交流群。
+- version 0.12.0：修改钉钉IM功能并完成测试，新增加微信公众号调用claude_api.py接口功能。
 
 
 ### 视频演示地址:

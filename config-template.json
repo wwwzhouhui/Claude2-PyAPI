@@ -39,5 +39,10 @@
   "feishu_verification_token":"事件订阅验证令牌",
   "telegram": {
     "bot_token": "xx:xx"
+  },
+  "wechat_mp": {
+    "token": "YOUR TOKEN",
+    "host": "0.0.0.0",
+    "port": "80"
   }
 }

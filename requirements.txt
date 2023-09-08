@@ -12,3 +12,4 @@ pydantic
 cryptography
 openai
 telebot
+werobot

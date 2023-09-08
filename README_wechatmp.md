@@ -1,4 +1,4 @@
-# Claude2 -pyAPI -dingding
+# Claude2 -pyAPI -webchatmp
    主要介绍Claude2api微信公众号相关配置和说明
 
 ## 微信公众号相关设置-创建应用

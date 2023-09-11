@@ -493,6 +493,14 @@ YouTube：https://www.youtube.com/watch?v=6rJvyaWJgYE
 
 西瓜视频：https://www.ixigua.com/7274261124952883723
 
+第六节 ：整合钉钉,微信公众号功能，支持钉钉、微信公众号聊天功能 实现钉钉、微信公众号创建聊天、发送聊天、信息功能
+
+哔哩哔哩：https://www.bilibili.com/video/BV1g34y1K7cE
+
+YouTube：https://www.youtube.com/watch?v=Kly9ip5Fims
+
+西瓜视频：https://www.ixigua.com/7266855523801268772
+
 
 
 ## 🎉 致谢

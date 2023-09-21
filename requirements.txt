@@ -13,3 +13,5 @@ cryptography
 openai
 telebot
 werobot
+PyPDF2
+docx

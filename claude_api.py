@@ -5,6 +5,8 @@ import re
 from curl_cffi import requests
 from dotenv import load_dotenv
 from common.log import logger
+import PyPDF2
+import docx
 
 load_dotenv()  # Load environment variables from .env file
 class Client:
@@ -249,12 +251,27 @@ class Client:
         return True
 
     def upload_attachment(self, file_path):
-        if file_path.endswith(('.txt', '.pdf', '.csv')):
+        if file_path.endswith(('.txt', '.pdf', '.csv','.docx','.doc')):
             file_name = os.path.basename(file_path)
             file_size = os.path.getsize(file_path)
             file_type = "text/plain"
-            with open(file_path, 'r', encoding='utf-8') as file:
-                file_content = file.read()
+            file_content = ""
+            if file_path.endswith('.txt'):
+                with open(file_path, 'r', encoding='utf-8') as file:
+                    file_content = file.read()
+
+            elif file_path.endswith('.pdf'):
+                with open(file_path, 'rb') as file:
+                    pdf_reader = PyPDF2.PdfFileReader(file)
+                    for page_num in range(pdf_reader.numPages):
+                        page = pdf_reader.getPage(page_num)
+                        file_content += page.extractText()
+
+            elif file_path.endswith(('.doc', '.docx')):
+                doc = docx.Document(file_path)
+                paragraphs = doc.paragraphs
+                for paragraph in paragraphs:
+                    file_content += paragraph.text
 
             return {
                 "file_name": file_name,

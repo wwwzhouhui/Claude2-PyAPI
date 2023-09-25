@@ -450,6 +450,7 @@ def send_message_judge(msg):
 - version 0.11.2：应网友要求增加了微信技术交流群。
 - version 0.12.0：修改钉钉IM功能并完成测试，新增加微信公众号调用claude_api.py接口功能。
 - version 0.12.2：更新claude_api.py 代码修改了文件上传增加doc 和pdf 文件上传解析功能。
+- version 0.12.3：增加testsend_messagestream.py 实现stream输出。
 
 
 ### 视频演示地址:

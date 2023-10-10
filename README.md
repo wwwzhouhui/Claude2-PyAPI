@@ -579,4 +579,4 @@ YouTube：https://www.youtube.com/watch?v=Kly9ip5Fims
 
 ##       技术交流群
 
-![](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/Screenshot_20230921_213227_com.tencent.mm.jpg)
+![](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/QQ%E5%9B%BE%E7%89%8720231010214244.jpg)

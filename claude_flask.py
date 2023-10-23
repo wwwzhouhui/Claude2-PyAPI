@@ -124,7 +124,7 @@ def chat_conversation_history(conversation_id):
 # def  get_proxy()  -> bool:
 #     #cookie = os.environ.get('cookie')
 #     isproxy = os.getenv('ISPROXY')
-#     print(isproxy)
+#     print(isproxy)1
 #     if not isproxy:
 #         return False
 #     else:
